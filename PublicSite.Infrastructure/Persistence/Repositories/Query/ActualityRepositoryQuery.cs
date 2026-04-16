@@ -11,7 +11,7 @@ namespace PublicSite.Infrastructure.Persistence.Repositories.Query
     public class ActualityRepositoryQuery(DBContext _context) : IActualityRepositoryQuery
     {
         private readonly DbSet<Actuality> _news = _context.News;
-        public async Task<(IEnumerable<Actuality> Result, long TotalCount)> GetAllActualityAsync(Guid? categoryId,int? limit = null)
+        public async Task<(IEnumerable<Actuality> Result, long TotalCount)> GetAllActualityAsync(Guid? categoryId,int? limit = null, bool? orderByDate = false)
         {
             IQueryable<Actuality> query = _news;
             
@@ -22,6 +22,11 @@ namespace PublicSite.Infrastructure.Persistence.Repositories.Query
 
             if (limit.HasValue)
                 query = query.Take(limit.Value);
+
+            if (orderByDate.HasValue && orderByDate.Value == true)
+                query = query.OrderByDescending(x => x.Date);
+            else
+                query = query.OrderByDescending(x => x.CreatedAt);
 
             return (await query.ToListAsync(), totalCount);
         }

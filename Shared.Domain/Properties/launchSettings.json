@@ -3,6 +3,10 @@
     "Profil 1": {
       "commandName": "Project",
       "workingDirectory": "D:\\AFO\\ABL\\PublicSite.Api\\bin\\Debug\\net10.0"
+    },
+    "Profil 2": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\ultimaXDeath\\Desktop\\Kalo\\ABL\\ABL.sln"
     }
   }
 }

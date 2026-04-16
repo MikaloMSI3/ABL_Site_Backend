@@ -10,7 +10,6 @@
     <Folder Include="Features\Actualities\Command\Delete\" />
     <Folder Include="Features\Actualities\Command\Update\" />
     <Folder Include="Features\Actualities\Query\GetAll\" />
-    <Folder Include="Features\Actualities\Query\GetById\" />
   </ItemGroup>
 
   <ItemGroup>
