@@ -16,10 +16,10 @@ namespace PublicSite.Application.Features.Actualities.Command.Create
         {
             var newEntity = Actuality.Create(request.Date, request.Title, request.Description, request.ActualityCategoryId, null);
             if (request.Ressource != null)
-                newEntity.Update(ressource: await _fileStorageService.SaveFileAsync(request.Ressource, "Actualities"));
+                newEntity.Update(ressource: await _fileStorageService.SaveFileAsync(request.Ressource, "actualities"));
 
             var entity = await _repository.AddActualityAsync(newEntity);
-            await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             return new CreateActualityResponse(
                entity.Id,

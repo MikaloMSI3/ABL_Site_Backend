@@ -36,6 +36,11 @@ namespace PublicSite.Infrastructure.Common.Configurations
                 file.Property(f => f.Size)
                     .HasColumnName("Ressource_Size");
             });
+
+            builder.HasOne(x => x.Category)
+                .WithMany(c => c.Actualities)
+                .HasForeignKey(x => x.ActualityCategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

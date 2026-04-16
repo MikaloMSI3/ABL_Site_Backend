@@ -17,7 +17,8 @@ namespace PublicSite.Application.Mappers
                 Title: actuality.Title,
                 Description: actuality.Description,
                 Ressource: actuality.Ressource,
-                ActualityCategoryId: actuality.ActualityCategoryId
+                ActualityCategoryId: actuality.ActualityCategoryId,
+                ActualityCategoryName : actuality.Category?.Name
             );
         }      
     }

@@ -11,7 +11,7 @@ namespace PublicSite.Application.Features.Actualities.Query.GetAll
     {
         public async Task<GetAllActualityResponse> Handle(GetAllActualityQuery request, CancellationToken cancellationToken)
         {
-            var (Results, TotalCount) = await _repository.GetAllActualityAsync(request.CategoryId, request.Limit, request.OrderByDate);
+            var (Results, TotalCount) = await _repository.GetAllActualityAsync(request.CategoryId, request.Limit, request.OrderByDate, includeCategory : true);
 
             return new GetAllActualityResponse
             {

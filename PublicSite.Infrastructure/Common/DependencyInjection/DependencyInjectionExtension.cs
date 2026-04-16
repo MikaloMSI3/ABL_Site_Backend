@@ -27,14 +27,14 @@ namespace PublicSite.Infrastructure.Common.DependencyInjection
                     npgsqlOptions => npgsqlOptions.MigrationsAssembly(assembly)
                 )
             );
-            //services.Scan(scan => scan.FromAssemblies(typeof(UnitOfWork).Assembly)
-            //.AddClasses()
-            //.AsImplementedInterfaces()
-            //.WithScopedLifetime());
+            services.Scan(scan => scan.FromAssemblies(typeof(UnitOfWork).Assembly)
+            .AddClasses(x => x.Where(r => r.Name.EndsWith("RepositoryCommand") || r.Name.EndsWith("RepositoryQuery")))
+            .AsImplementedInterfaces()
+            .WithScopedLifetime());
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IActualityRepositoryCommand, ActualityRepositoryCommand>();
-            services.AddScoped<IActualityRepositoryQuery, ActualityRepositoryQuery>();
+            //services.AddScoped<IActualityRepositoryCommand, ActualityRepositoryCommand>();
+            //services.AddScoped<IActualityRepositoryQuery, ActualityRepositoryQuery>();
 
             return services;
         }

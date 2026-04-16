@@ -19,12 +19,14 @@ namespace PublicSite.Application.Features.Actualities.Command.Update
 
             if (request.Ressource != null)
             {
-                act.Update(ressource: await _fileStorageService.SaveFileAsync(request.Ressource, "Actualities"));
+                act.Update(ressource: await _fileStorageService.SaveFileAsync(request.Ressource, "actualities"));
                 if (actualAct.Result.Ressource != null)
                     _fileStorageService.DeleteFileAsync(actualAct.Result.Ressource);
             }
               
             var entity = await _repository.UpdateActualityAsync(request.Id, act);
+
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             return new UpdateActualityResponse(
                 entity.Id,

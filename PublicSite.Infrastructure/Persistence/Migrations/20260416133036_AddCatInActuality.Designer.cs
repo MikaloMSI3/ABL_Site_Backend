@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using PublicSite.Infrastructure.Persistence.Context;
@@ -11,9 +12,11 @@ using PublicSite.Infrastructure.Persistence.Context;
 namespace PublicSite.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20260416133036_AddCatInActuality")]
+    partial class AddCatInActuality
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,6 +32,9 @@ namespace PublicSite.Infrastructure.Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<Guid?>("ActualityCategoryId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("CategoryId")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("CreatedAt")
@@ -53,6 +59,8 @@ namespace PublicSite.Infrastructure.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ActualityCategoryId");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("News", (string)null);
                 });
@@ -368,10 +376,14 @@ namespace PublicSite.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("PublicSite.Domain.Entities.Models.Actuality", b =>
                 {
-                    b.HasOne("PublicSite.Domain.Entities.Models.ActualityCategory", "Category")
+                    b.HasOne("PublicSite.Domain.Entities.Models.ActualityCategory", null)
                         .WithMany("Actualities")
                         .HasForeignKey("ActualityCategoryId")
                         .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("PublicSite.Domain.Entities.Models.ActualityCategory", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
 
                     b.OwnsOne("PublicSite.Domain.Entities.ValueObjects.Ressource", "Ressource", b1 =>
                         {

@@ -11,14 +11,19 @@ namespace PublicSite.Infrastructure.Persistence.Repositories.Query
     public class ActualityRepositoryQuery(DBContext _context) : IActualityRepositoryQuery
     {
         private readonly DbSet<Actuality> _news = _context.News;
-        public async Task<(IEnumerable<Actuality> Result, long TotalCount)> GetAllActualityAsync(Guid? categoryId,int? limit = null, bool? orderByDate = false)
+        public async Task<(IEnumerable<Actuality> Result, long TotalCount)> GetAllActualityAsync(Guid? categoryId,int? limit = null, bool? orderByDate = false, bool? includeCategory = false)
         {
             IQueryable<Actuality> query = _news;
-            
+
+            query = query.Where(x => x.IsDeleted == false);
+
             if (categoryId.HasValue)
-                query = query.Where(x => x.ActualityCategoryId == categoryId.Value && x.IsDeleted == false);
+                query = query.Where(x => x.ActualityCategoryId == categoryId.Value);
             
             var totalCount = query.Count();
+
+            if (includeCategory.HasValue && includeCategory.Value == true)
+                query = query.Include(x => x.Category);
 
             if (limit.HasValue)
                 query = query.Take(limit.Value);

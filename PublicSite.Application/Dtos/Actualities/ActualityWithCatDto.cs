@@ -5,15 +5,12 @@ using System.Text;
 
 namespace PublicSite.Application.Dtos.Actualities
 {
-    public record ActualityDto
+    public record ActualityWithCatDto
     (
         Guid Id,
         DateTime? Date,
         string Title,
         string? Description,
-        Ressource? Ressource,
-        Guid? ActualityCategoryId,
-        string? ActualityCategoryName = null
+        Ressource? Ressource
     );
-        
 }

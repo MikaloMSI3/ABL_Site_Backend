@@ -12,7 +12,7 @@ namespace PublicSite.Application.Features.Actualities.Command.Delete
         public async Task<DeleteActualityResponse> Handle(DeleteActualityCommand request, CancellationToken cancellationToken)
         {
             var result = await _repository.SoftDeleteActualityAsync(request.Id);
-            await _unitOfWork.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             return new DeleteActualityResponse(result);
         }

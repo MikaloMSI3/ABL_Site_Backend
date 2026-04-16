@@ -15,6 +15,7 @@ namespace PublicSite.Domain.Entities.Models
         public string? Description { get; private set; }
         public Ressource? Ressource { get; private set; }
         public Guid? ActualityCategoryId { get; private set; }
+        public virtual ActualityCategory? Category { get; set; }
 
         private Actuality() {}
 

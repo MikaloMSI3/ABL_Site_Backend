@@ -3,12 +3,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PublicSite.Api.Models;
 using PublicSite.Application.Features.Actualities.Command.Create;
+using PublicSite.Application.Features.Actualities.Command.Delete;
 using PublicSite.Application.Features.Actualities.Command.Update;
 using PublicSite.Application.Features.Actualities.Query.GetAll;
 using PublicSite.Application.Features.Actualities.Query.GetById;
 using PublicSite.Domain.Entities.Models;
 
-namespace PublicSite.Api.Controllers
+namespace PublicSite.Api.Controllers.Actualities
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -27,8 +28,8 @@ namespace PublicSite.Api.Controllers
             });
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetById([FromQuery] Guid id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(Guid id)
         {
             var result = await _mediator.Send(new GetByIdActualityQuery(id));
             return Ok(new ApiResponse<GetByIdActualityResponse>
@@ -74,6 +75,19 @@ namespace PublicSite.Api.Controllers
                 Code = 200,
                 Message = "Opération réussie",
                 Data = result
+            });
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _mediator.Send(new DeleteActualityCommand(id));
+
+            return Ok(new ApiResponse<DeleteActualityResponse>
+            {
+                Success = true,
+                Code = 200,
+                Message = "Opération réussie",
             });
         }
 
