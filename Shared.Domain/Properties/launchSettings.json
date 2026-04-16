@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Profil 1": {
+      "commandName": "Project",
+      "workingDirectory": "D:\\AFO\\ABL\\PublicSite.Api\\bin\\Debug\\net10.0"
+    }
+  }
+}
