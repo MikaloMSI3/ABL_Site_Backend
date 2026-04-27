@@ -10,6 +10,7 @@ namespace PublicSite.Domain.Entities.Models
     public class FaqCategory : BaseEntity
     {
         public string Name { get; private set; } = default!;
+        public virtual ICollection<Faq> Faqs { get; set; } = [];
 
         private FaqCategory() { }
 

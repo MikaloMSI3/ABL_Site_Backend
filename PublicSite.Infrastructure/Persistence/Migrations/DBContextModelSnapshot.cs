@@ -114,6 +114,9 @@ namespace PublicSite.Infrastructure.Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("ClubName")
+                        .HasColumnType("text");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -121,16 +124,35 @@ namespace PublicSite.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("Firstname")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
+
+                    b.Property<string>("Lastname")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MailBody")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("MailSubject")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("OrganisationName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Email")
-                        .IsUnique();
 
                     b.ToTable("Contacts", (string)null);
                 });
@@ -238,21 +260,39 @@ namespace PublicSite.Infrastructure.Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("Order")
+                    b.Property<int?>("Order")
                         .HasColumnType("integer");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Type");
-
                     b.ToTable("Images", (string)null);
+                });
+
+            modelBuilder.Entity("PublicSite.Domain.Entities.Models.NewsLetter", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("NewsLetters", (string)null);
                 });
 
             modelBuilder.Entity("PublicSite.Domain.Entities.Models.Slogan", b =>
@@ -316,9 +356,6 @@ namespace PublicSite.Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
@@ -331,6 +368,9 @@ namespace PublicSite.Infrastructure.Persistence.Migrations
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -417,9 +457,19 @@ namespace PublicSite.Infrastructure.Persistence.Migrations
                     b.Navigation("Ressource");
                 });
 
+            modelBuilder.Entity("PublicSite.Domain.Entities.Models.Faq", b =>
+                {
+                    b.HasOne("PublicSite.Domain.Entities.Models.FaqCategory", "Category")
+                        .WithMany("Faqs")
+                        .HasForeignKey("FaqCategoryId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("Category");
+                });
+
             modelBuilder.Entity("PublicSite.Domain.Entities.Models.Gallery", b =>
                 {
-                    b.HasOne("PublicSite.Domain.Entities.Models.Album", null)
+                    b.HasOne("PublicSite.Domain.Entities.Models.Album", "Album")
                         .WithMany("Galleries")
                         .HasForeignKey("AlbumId")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -462,6 +512,8 @@ namespace PublicSite.Infrastructure.Persistence.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("GalleryId");
                         });
+
+                    b.Navigation("Album");
 
                     b.Navigation("Ressource")
                         .IsRequired();
@@ -508,7 +560,8 @@ namespace PublicSite.Infrastructure.Persistence.Migrations
                                 .HasForeignKey("ImageId");
                         });
 
-                    b.Navigation("Ressource");
+                    b.Navigation("Ressource")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("PublicSite.Domain.Entities.Models.Sponsor", b =>
@@ -607,6 +660,11 @@ namespace PublicSite.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("PublicSite.Domain.Entities.Models.Album", b =>
                 {
                     b.Navigation("Galleries");
+                });
+
+            modelBuilder.Entity("PublicSite.Domain.Entities.Models.FaqCategory", b =>
+                {
+                    b.Navigation("Faqs");
                 });
 #pragma warning restore 612, 618
         }

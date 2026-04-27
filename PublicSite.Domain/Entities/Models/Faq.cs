@@ -11,6 +11,7 @@ namespace PublicSite.Domain.Entities.Models
         public string Question { get; private set; } = default!;
         public string Answer { get; private set; } = default!;
         public Guid? FaqCategoryId { get; private set; }
+        public virtual FaqCategory? Category { get; set; }
 
         private Faq() { }
 

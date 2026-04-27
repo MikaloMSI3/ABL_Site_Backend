@@ -11,33 +11,33 @@ namespace PublicSite.Domain.Entities.Models
     {
         public string Title { get; set; } = default!;
         public string? Description { get; set; }
-        public DateTime Date { get; set; } //return year only
+        public int Year { get; set; } //return year only
 
         private TimelineItem() { }
 
-        private TimelineItem(string title, string? description, DateTime date)
+        private TimelineItem(string title, string? description, int year)
         {
             Title = title;
             Description = description;
-            Date = DateTime.SpecifyKind(date,DateTimeKind.Utc);
+            Year = year;
         }
-        public static TimelineItem Create(string title, string? description, DateTime date)
+        public static TimelineItem Create(string title, string? description, int year)
         {
             CheckStringValue(title);
-            return new TimelineItem(title, description, date);
+            return new TimelineItem(title, description, year);
         }
 
-        public void Update(string? title = null, string? description = null, DateTime? date = null)
+        public void Update(string? title = null, string? description = null, int? year = null)
         {
             if (!String.IsNullOrWhiteSpace(title))
                 Title = title;
             if (!String.IsNullOrWhiteSpace(description))
                 Description = description;
-            if (date.HasValue)
-                Date = DateTime.SpecifyKind(date.Value,DateTimeKind.Utc);
+            if (year.HasValue)
+                Year = year.Value;
         }
 
-        public void SoftDeleteActuality() => IsDeleted = true;
+        public void SoftDelete() => IsDeleted = true;
         public static void CheckStringValue(string value)
         {
             if (string.IsNullOrEmpty(value))

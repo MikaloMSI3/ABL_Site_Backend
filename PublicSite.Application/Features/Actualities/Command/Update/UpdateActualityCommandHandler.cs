@@ -14,17 +14,17 @@ namespace PublicSite.Application.Features.Actualities.Command.Update
     {
         public async Task<UpdateActualityResponse> Handle(UpdateActualityCommand request, CancellationToken cancellationToken)
         {
-            var act = new Actuality(request.Date, request.Title, request.Description, request.ActualityCategoryId);
-            var actualAct = _queryRepo.GetByIdActualityAsync(request.Id);
+            var act = _queryRepo.GetByIdActualityAsync(request.Id);
+            act.Result.Update(request.Date, request.Title, request.Description, request.ActualityCategoryId);
 
             if (request.Ressource != null)
             {
-                act.Update(ressource: await _fileStorageService.SaveFileAsync(request.Ressource, "actualities"));
-                if (actualAct.Result.Ressource != null)
-                    _fileStorageService.DeleteFileAsync(actualAct.Result.Ressource);
+                act.Result.Update(ressource: await _fileStorageService.SaveFileAsync(request.Ressource, "actualities"));
+                if (act.Result.Ressource != null)
+                    _fileStorageService.DeleteFileAsync(act.Result.Ressource);
             }
               
-            var entity = await _repository.UpdateActualityAsync(request.Id, act);
+            var entity = await _repository.UpdateActualityAsync(request.Id, act.Result);
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 

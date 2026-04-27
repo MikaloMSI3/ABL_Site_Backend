@@ -19,10 +19,12 @@ namespace PublicSite.Domain.Entities.Models
             Name = name;
             Logo = logo;
         }
-        public static Sponsor Create(string name, Ressource logo)
+        public static Sponsor Create(string name, Ressource? logo)
         {
             CheckStringValue(name);
-            CheckRessourceValue(logo);
+            if (logo != null)
+                CheckRessourceValue(logo);
+
             return new Sponsor(name, logo);
         }
         public void Update(string? name = null, Ressource? logo = null)

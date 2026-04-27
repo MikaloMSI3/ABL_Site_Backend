@@ -13,28 +13,35 @@ namespace PublicSite.Domain.Entities.Models
         public string? Description { get; private set; } //alt
         public Ressource Ressource { get; private set; } = default!;
         public Guid? AlbumId { get; private set; }
+        public virtual Album? Album { get; set; }
 
         private Gallery() { }
 
-        private Gallery(DateTime date, string? description, Ressource ressource)
+        private Gallery(DateTime date, string? description, Guid? albumId, Ressource ressource)
         {
             Date = date;
             Description = description;
             Ressource = ressource;
+            AlbumId = albumId;
         }
 
-        public static Gallery Create(DateTime date, string? description, Ressource ressource)
+        public static Gallery Create(DateTime date, string? description, Guid? albumId, Ressource ressource)
         {
             CheckRessourceValue(ressource);
-            return new Gallery(date, description, ressource);
+            return new Gallery(date, description, albumId, ressource);
         }
 
-        public void Update(DateTime? date = null, string? description = null, Ressource? ressource = null)
+        public void Update(DateTime? date = null, string? description = null, Guid? albumId = null, Ressource? ressource = null)
         {
             if (date.HasValue)
                 Date = date.Value;
+
             if (String.IsNullOrWhiteSpace(description))
                 Description = description;
+
+            if (albumId.HasValue || albumId is not null)
+                AlbumId = albumId;
+
             if (ressource != null)
             {
                 CheckRessourceValue(ressource);

@@ -23,6 +23,6 @@ namespace PublicSite.Domain.Entities.Models
             return new Slogan(description, isActive);
         }
         public void Deactivate() => IsActive = false;
-        public void SoftDeleteActuality() => IsDeleted = true;
+        public void SoftDelete() => IsDeleted = true;
     }
 }

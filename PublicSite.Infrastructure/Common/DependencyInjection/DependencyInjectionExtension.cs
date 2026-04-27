@@ -33,9 +33,7 @@ namespace PublicSite.Infrastructure.Common.DependencyInjection
             .WithScopedLifetime());
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            //services.AddScoped<IActualityRepositoryCommand, ActualityRepositoryCommand>();
-            //services.AddScoped<IActualityRepositoryQuery, ActualityRepositoryQuery>();
-
+            
             return services;
         }
     }

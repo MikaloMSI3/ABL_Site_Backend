@@ -13,6 +13,11 @@ namespace PublicSite.Infrastructure.Common.Configurations
         {
             builder.ToTable("FAQCategories");
             builder.HasIndex(x => x.Name).IsUnique();
+
+            builder.HasMany(x => x.Faqs)
+                .WithOne()
+                .HasForeignKey(a => a.FaqCategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

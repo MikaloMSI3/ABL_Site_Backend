@@ -5,11 +5,12 @@ using System.Text;
 
 namespace PublicSite.Application.Features.Actualities.Command.Update
 {
-    public record UpdateActualityRequest(
+    public record UpdateActualityRequest
+    (
         DateTime? Date,
         string Title,
         string? Description,
         IFormFile Ressource,
         Guid? ActualityCategoryId
-        );
+    );
 }

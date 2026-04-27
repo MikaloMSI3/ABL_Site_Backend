@@ -13,17 +13,18 @@ namespace PublicSite.Application.Features.Actualities.Query.GetById
             var actuality = await _repository.GetByIdActualityAsync(request.Id);
 
             return new GetByIdActualityResponse
-                (
-                    Id: actuality.Id,
-                    CreatedAt: actuality.CreatedAt,
-                    UpdatedAt: actuality.UpdatedAt,
-                    IsDeleted : actuality.IsDeleted,
-                    Date: actuality.Date,
-                    Title: actuality.Title,
-                    Description: actuality.Description,
-                    Ressource: actuality.Ressource,
-                    ActualityCategoryId: actuality.ActualityCategoryId
-                );
+            (
+                Id: actuality.Id,
+                CreatedAt: actuality.CreatedAt,
+                UpdatedAt: actuality.UpdatedAt,
+                IsDeleted : actuality.IsDeleted,
+                Date: actuality.Date,
+                Title: actuality.Title,
+                Description: actuality.Description,
+                Ressource: actuality.Ressource,
+                ActualityCategoryId: actuality.ActualityCategoryId,
+                ActualityCategoryName : actuality.Category?.Name
+            );
         }
     }
 }

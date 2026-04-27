@@ -1,5 +1,4 @@
-﻿using PublicSite.Domain.Entities.Enums;
-using PublicSite.Domain.Entities.ValueObjects;
+﻿using PublicSite.Domain.Entities.ValueObjects;
 using PublicSite.Domain.Exceptions;
 using Shared.Domain;
 using System;
@@ -11,33 +10,27 @@ namespace PublicSite.Domain.Entities.Models
 {
     public class Image : BaseEntity
     {
-        public int Order { get; private set; }
+        public int? Order { get; private set; }
 
-        [Column(TypeName = "text")]
-        public ImageType Type { get; private set; }
-
-        public Ressource? Ressource { get; private set; }
+        public Ressource Ressource { get; private set; } = default!;
 
         private Image() { }
 
-        private Image(int order, ImageType type, Ressource? ressource)
+        private Image(Ressource ressource, int? order = null)
         {
             Order = order;
-            Type = type;
             Ressource = ressource;
         }
-        public static Image Create(int order, ImageType type, Ressource ressource)
+        public static Image Create(Ressource ressource, int? order = null)
         {
             CheckRessourceValue(ressource);
-            return new Image(order, type, ressource);
+            return new Image(ressource, order);
         }
 
-        public void Update(int? order = null, ImageType? type = null, Ressource? ressource = null)
+        public void Update(int? order = null, Ressource? ressource = null)
         {
             if (order > 0 || order.HasValue)
                 Order = order.Value;
-            if (type.HasValue)
-                Type = type.Value;
             if (ressource != null)
             {
                 CheckRessourceValue(ressource);
@@ -45,7 +38,7 @@ namespace PublicSite.Domain.Entities.Models
             }
         }
 
-        public void SoftDeleteActuality() => IsDeleted = true;
+        public void SoftDelete() => IsDeleted = true;
 
         public static void CheckRessourceValue(Ressource logo)
         {

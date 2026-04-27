@@ -21,12 +21,10 @@ namespace PublicSite.Application.Common.DependencyInjection
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             services.AddMediatR(config => config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
-            //services.Scan(scan => scan.FromAssemblies(typeof(FileStorageService).Assembly)
-            //.AddClasses()
-            //.AsImplementedInterfaces()
-            //.WithScopedLifetime());
-
-            services.AddScoped<IFileStorageService, FileStorageService>();
+            services.Scan(scan => scan.FromAssemblies(typeof(FileStorageService).Assembly)
+            .AddClasses(s => s.Where(x => x.Name.EndsWith("Service")))
+            .AsImplementedInterfaces()
+            .WithScopedLifetime());
 
             return services;
         }

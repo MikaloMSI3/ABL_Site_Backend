@@ -11,7 +11,7 @@ namespace PublicSite.Application.Features.Actualities.Command.Update
         DateTime? Date,
         string Title,
         string? Description,
-        IFormFile Ressource,
+        IFormFile? Ressource,
         Guid? ActualityCategoryId
     ) : IRequest<UpdateActualityResponse>;
 }

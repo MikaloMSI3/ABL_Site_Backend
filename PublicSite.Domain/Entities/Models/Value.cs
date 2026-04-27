@@ -42,7 +42,7 @@ namespace PublicSite.Domain.Entities.Models
                 Icon = ressource;
             }
         }
-        public void SoftDeleteActuality() => IsDeleted = true;
+        public void SoftDelete() => IsDeleted = true;
         public static void CheckStringValue(string value)
         {
             if (string.IsNullOrEmpty(value))

@@ -22,23 +22,24 @@ namespace PublicSite.Infrastructure.Persistence.Repositories.Query
             
             var totalCount = query.Count();
 
+            if (orderByDate.HasValue && orderByDate.Value == true)
+                query = query.OrderByDescending(x => x.Date);
+            else
+                query = query.OrderByDescending(x => x.CreatedAt);
+
             if (includeCategory.HasValue && includeCategory.Value == true)
                 query = query.Include(x => x.Category);
 
             if (limit.HasValue)
                 query = query.Take(limit.Value);
 
-            if (orderByDate.HasValue && orderByDate.Value == true)
-                query = query.OrderByDescending(x => x.Date);
-            else
-                query = query.OrderByDescending(x => x.CreatedAt);
-
             return (await query.ToListAsync(), totalCount);
         }
 
         public async Task<Actuality> GetByIdActualityAsync(Guid id)
         {
-            var entity = await _news.FindAsync(id);
+            var entity = await _news.Include(x => x.Category).FirstOrDefaultAsync();
+            
             return entity ?? throw new Exception("Entity not found");
         }
     }

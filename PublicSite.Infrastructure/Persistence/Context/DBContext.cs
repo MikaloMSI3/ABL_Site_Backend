@@ -21,6 +21,7 @@ namespace PublicSite.Infrastructure.Persistence.Context
         public DbSet<TimelineItem> TimelineItems => Set<TimelineItem>();
         public DbSet<Value> Values => Set<Value>();
         public DbSet<Album> Albums => Set<Album>();
+        public DbSet<NewsLetter> NewsLetters => Set<NewsLetter>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

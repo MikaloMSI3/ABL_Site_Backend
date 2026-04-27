@@ -15,6 +15,7 @@ namespace PublicSite.Application.Features.Actualities.Query.GetById
         string Title,
         string? Description,
         Ressource? Ressource,
-        Guid? ActualityCategoryId
+        Guid? ActualityCategoryId,
+        string? ActualityCategoryName
     );
 }

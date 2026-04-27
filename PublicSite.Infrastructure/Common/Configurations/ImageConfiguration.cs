@@ -12,7 +12,6 @@ namespace PublicSite.Infrastructure.Common.Configurations
         public void Configure(EntityTypeBuilder<Image> builder)
         {
             builder.ToTable("Images");
-            builder.HasIndex(x => x.Type);
 
             builder.OwnsOne(a => a.Ressource, file =>
             {

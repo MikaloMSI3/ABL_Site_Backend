@@ -36,6 +36,11 @@ namespace PublicSite.Infrastructure.Common.Configurations
                 file.Property(f => f.Size)
                     .HasColumnName("Ressource_Size");
             });
+
+            builder.HasOne(x => x.Album)
+                .WithMany(c => c.Galleries)
+                .HasForeignKey(x => x.AlbumId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
