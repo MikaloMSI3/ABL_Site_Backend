@@ -9,6 +9,7 @@ namespace PublicSite.Application.Features.Sponsors.Command.Create
     public record CreateSponsorCommand
     (
         string Name,
-        IFormFile Logo
+        IFormFile Logo,
+        string? SiteUrl
     ) : IRequest<CreateSponsorResponse>;
 }

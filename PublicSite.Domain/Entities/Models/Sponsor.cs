@@ -10,27 +10,32 @@ namespace PublicSite.Domain.Entities.Models
     public class Sponsor : BaseEntity
     {
         public string Name { get; private set; } = default!;
+        public string? SiteUrl { get; private set; }
         public Ressource? Logo { get; set;  }
 
         private Sponsor() { }
 
-        private Sponsor(string name, Ressource? logo)
+        private Sponsor(string name, Ressource? logo, string? siteUrl)
         {
             Name = name;
             Logo = logo;
+            SiteUrl = siteUrl;
         }
-        public static Sponsor Create(string name, Ressource? logo)
+        public static Sponsor Create(string name, Ressource? logo, string? siteUrl)
         {
             CheckStringValue(name);
             if (logo != null)
                 CheckRessourceValue(logo);
 
-            return new Sponsor(name, logo);
+            return new Sponsor(name, logo, siteUrl);
         }
-        public void Update(string? name = null, Ressource? logo = null)
+        public void Update(string? name = null, Ressource? logo = null, string? siteUrl = null)
         {
             if (!String.IsNullOrWhiteSpace(name))
                 Name = name;
+            if (!String.IsNullOrWhiteSpace(siteUrl))
+                SiteUrl = siteUrl;
+
             if (logo != null)
             {
                 CheckRessourceValue(logo);

@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using PublicSite.Api.Middleware;
 using PublicSite.Application.Common.DependencyInjection;
+using PublicSite.Application.Services;
 using PublicSite.Infrastructure.Common.DependencyInjection;
 using PublicSite.Infrastructure.Persistence.Context;
 
@@ -13,6 +15,9 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddPostgreSqlDB(builder.Configuration, typeof(DBContext).Assembly.FullName!);
+
+builder.Services.Configure<SmtpSetting>(
+    builder.Configuration.GetSection("SmtpSetting"));
 
 string corsName = builder.Configuration["Cors:Policy"]!;
 var corsOrigin = builder.Configuration.GetSection("Cors:Origin").Get<string[]>();
@@ -63,5 +68,10 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(builder.Configuration["Upload:StoragePath"]!),
+    RequestPath = "/uploads"
+});
 
 app.Run();

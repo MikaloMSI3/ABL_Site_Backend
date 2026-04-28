@@ -16,7 +16,7 @@ namespace PublicSite.Infrastructure.Persistence.Repositories.Command
         private readonly DbSet<Sponsor> _sponsors = _context.Sponsors;
         public async Task<Sponsor> AddSponsorAsync(Sponsor sponsor)
         {
-            var entity = Sponsor.Create(sponsor.Name, sponsor.Logo);
+            var entity = Sponsor.Create(sponsor.Name, sponsor.Logo, sponsor.SiteUrl);
             await _sponsors.AddAsync(entity);
             return entity;
         }

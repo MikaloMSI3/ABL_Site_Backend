@@ -15,7 +15,7 @@ namespace PublicSite.Application.Features.Sponsors.Command.Create
         public async Task<CreateSponsorResponse> Handle(CreateSponsorCommand request, CancellationToken cancellationToken)
         {
             var ressource = await _fileStorageService.SaveFileAsync(request.Logo, "sponsors");
-            var newEntity = Sponsor.Create(request.Name, ressource);
+            var newEntity = Sponsor.Create(request.Name, ressource, request.SiteUrl);
 
             var entity = await _repository.AddSponsorAsync(newEntity);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
@@ -25,7 +25,8 @@ namespace PublicSite.Application.Features.Sponsors.Command.Create
                 entity.Id,
                 entity.CreatedAt,
                 entity.Name,
-                entity.Logo
+                entity.Logo,
+                entity.SiteUrl
             );
         }
     }

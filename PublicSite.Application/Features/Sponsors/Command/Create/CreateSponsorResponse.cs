@@ -10,6 +10,7 @@ namespace PublicSite.Application.Features.Sponsors.Command.Create
         Guid Id,
         DateTime CreatedAt,
         string Name,
-        Ressource? Logo
+        Ressource? Logo,
+        string? SiteUrl
     );
 }
