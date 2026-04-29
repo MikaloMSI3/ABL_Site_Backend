@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PublicSite.Api.Models;
 using PublicSite.Application.Features.Galleries.Command.Create;
+using PublicSite.Application.Features.Galleries.Command.CreateMany;
 using PublicSite.Application.Features.Galleries.Command.Delete;
 using PublicSite.Application.Features.Galleries.Command.Update;
 using PublicSite.Application.Features.Galleries.Query.GetAll;
@@ -45,6 +46,19 @@ namespace PublicSite.Api.Controllers.Galleries
         {
             var result = await _mediator.Send(command);
             return Ok(new ApiResponse<CreateGalleryResponse>
+            {
+                Success = true,
+                Code = 200,
+                Message = "Opération réussie",
+                Data = result
+            });
+        }
+
+        [HttpPost("{albumId}")]
+        public async Task<IActionResult> Create(Guid albumId, [FromForm] CreateManyGalleryRequest request)
+        {
+            var result = await _mediator.Send(new CreateManyGalleryCommand(albumId, request.Ressources));
+            return Ok(new ApiResponse<CreateManyGalleryResponse>
             {
                 Success = true,
                 Code = 200,

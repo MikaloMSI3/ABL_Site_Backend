@@ -5,12 +5,10 @@ using System.Text;
 
 namespace PublicSite.Application.Dtos.Galleries
 {
-    public record GalleryWithAlbumDto
+    public record GalleryGetManyDto
     (
         Guid Id,
-        DateTime? Date,
-        string? Description,
-        Ressource? Ressource,
-        Guid? AlbumId
+        DateTime CreatedAt,
+        Ressource? Ressource
     );
 }

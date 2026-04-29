@@ -9,7 +9,7 @@ namespace PublicSite.Application.Features.Galleries.Command.Create
 {
     public record CreateGalleryCommand
     (
-        DateTime Date,
+        DateTime? Date,
         string? Description,
         IFormFile Ressource,
         Guid? AlbumId

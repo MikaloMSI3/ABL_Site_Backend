@@ -15,7 +15,7 @@ namespace PublicSite.Application.Features.Galleries.Command.Create
         public async Task<CreateGalleryResponse> Handle(CreateGalleryCommand request, CancellationToken cancellationToken)
         {
             var ressource = await _fileStorageService.SaveFileAsync(request.Ressource, "galleries");
-            var newEntity = Gallery.Create(request.Date, request.Description, request.AlbumId, ressource);
+            var newEntity = Gallery.Create(request.AlbumId, ressource, request.Date, request.Description);
 
             var entity = await _repository.AddGalleryAsync(newEntity);
             await _unitOfWork.SaveChangesAsync(cancellationToken);

@@ -7,8 +7,9 @@ namespace PublicSite.Domain.Interfaces.Repositories.Command
 {
     public interface IGalleryRepositoryCommand
     {
-        Task<Gallery> AddGalleryAsync(Gallery actuality);
-        Task<Gallery> UpdateGalleryAsync(Guid id, Gallery actuality);
+        Task<Gallery> AddGalleryAsync(Gallery gallery);
+        Task<List<Gallery>> AddManyGalleryAsync(List<Gallery> gallery);
+        Task<Gallery> UpdateGalleryAsync(Guid id, Gallery gallery);
         Task<bool> SoftDeleteGalleryAsync(Guid id);
     }
 }

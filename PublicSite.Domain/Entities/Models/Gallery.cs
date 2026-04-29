@@ -4,12 +4,13 @@ using Shared.Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace PublicSite.Domain.Entities.Models
 {
     public class Gallery : BaseEntity
     {
-        public DateTime Date { get; private set; }
+        public DateTime? Date { get; private set; }
         public string? Description { get; private set; } //alt
         public Ressource Ressource { get; private set; } = default!;
         public Guid? AlbumId { get; private set; }
@@ -17,7 +18,7 @@ namespace PublicSite.Domain.Entities.Models
 
         private Gallery() { }
 
-        private Gallery(DateTime date, string? description, Guid? albumId, Ressource ressource)
+        private Gallery(Guid? albumId, Ressource ressource,DateTime? date = null, string? description = null)
         {
             Date = date;
             Description = description;
@@ -25,10 +26,10 @@ namespace PublicSite.Domain.Entities.Models
             AlbumId = albumId;
         }
 
-        public static Gallery Create(DateTime date, string? description, Guid? albumId, Ressource ressource)
+        public static Gallery Create(Guid? albumId, Ressource ressource, DateTime? date = null, string? description = null)
         {
             CheckRessourceValue(ressource);
-            return new Gallery(date, description, albumId, ressource);
+            return new Gallery(albumId, ressource,date, description);
         }
 
         public void Update(DateTime? date = null, string? description = null, Guid? albumId = null, Ressource? ressource = null)
@@ -36,7 +37,7 @@ namespace PublicSite.Domain.Entities.Models
             if (date.HasValue)
                 Date = date.Value;
 
-            if (String.IsNullOrWhiteSpace(description))
+            if (System.String.IsNullOrWhiteSpace(description))
                 Description = description;
 
             if (albumId.HasValue || albumId is not null)
@@ -57,7 +58,7 @@ namespace PublicSite.Domain.Entities.Models
 
         public static void CheckRessourceValue(Ressource logo)
         {
-            if (String.IsNullOrWhiteSpace(logo.Url))
+            if (System.String.IsNullOrWhiteSpace(logo.Url))
                 throw new DomainException("Ressource Url cannot be empty");
         }
     }

@@ -20,5 +20,15 @@ namespace PublicSite.Application.Mappers
                 AlbumName : gallery.Album?.Name
             );
         }
+
+        public static GalleryGetManyDto ToGetManyDto(Gallery gallery)
+        {
+            return new GalleryGetManyDto
+            (
+                Id: gallery.Id,
+                CreatedAt : gallery.CreatedAt,
+                Ressource: gallery.Ressource
+            );
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace PublicSite.Application.Features.Galleries.Command.Create
     (
         Guid Id,
         DateTime CreatedAt,
-        DateTime Date,
+        DateTime? Date,
         string? Description,
         Ressource? Ressource,
         Guid? AlbumId
