@@ -12,6 +12,7 @@ namespace PublicSite.Infrastructure.Common.Configurations
         public void Configure(EntityTypeBuilder<Contact> builder)
         {
             builder.ToTable("Contacts");
+            builder.HasQueryFilter(x => !x.IsDeleted);
         }
     }
 }

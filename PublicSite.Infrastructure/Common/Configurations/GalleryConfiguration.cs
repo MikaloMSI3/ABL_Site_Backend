@@ -15,6 +15,8 @@ namespace PublicSite.Infrastructure.Common.Configurations
             builder.ToTable("Galleries");
             builder.HasIndex(x => x.AlbumId);
 
+            builder.HasQueryFilter(x => !x.IsDeleted);
+
             builder.OwnsOne(a => a.Ressource, file =>
             {
                 file.Property(f => f.Url)

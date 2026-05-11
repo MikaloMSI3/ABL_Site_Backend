@@ -8,6 +8,7 @@ namespace PublicSite.Domain.Interfaces.Repositories.Command
     public interface IAlbumRepositoryCommand
     {
         Task<Album> AddAlbumAsync(Album actuality);
-        Task<bool> SoftDeleteAlbumAsync(Guid id);
+        Task<Album> SoftDeleteAlbumAsync(Guid id);
+        Task<Album> UpdateAlbumAsync(Guid id, string name);
     }
 }

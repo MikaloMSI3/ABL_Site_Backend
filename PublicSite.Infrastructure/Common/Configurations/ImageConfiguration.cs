@@ -12,6 +12,7 @@ namespace PublicSite.Infrastructure.Common.Configurations
         public void Configure(EntityTypeBuilder<Image> builder)
         {
             builder.ToTable("Images");
+            builder.HasQueryFilter(x => !x.IsDeleted);
 
             builder.OwnsOne(a => a.Ressource, file =>
             {

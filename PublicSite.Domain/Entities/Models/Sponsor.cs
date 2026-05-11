@@ -41,6 +41,8 @@ namespace PublicSite.Domain.Entities.Models
                 CheckRessourceValue(logo);
                 Logo = logo;
             }
+
+            UpdatedAt = DateTime.UtcNow;
         }
         public void SoftDeleteSponsor() => IsDeleted = true;
 

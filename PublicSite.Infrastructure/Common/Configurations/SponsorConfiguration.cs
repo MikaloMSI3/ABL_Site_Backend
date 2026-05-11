@@ -13,6 +13,7 @@ namespace PublicSite.Infrastructure.Common.Configurations
         {
             builder.ToTable("Sponsors");
             builder.HasIndex(x => x.Name);
+            builder.HasQueryFilter(x => !x.IsDeleted);
 
             builder.OwnsOne(a => a.Logo, file =>
             {

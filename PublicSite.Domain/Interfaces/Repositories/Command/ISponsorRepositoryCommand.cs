@@ -9,6 +9,6 @@ namespace PublicSite.Domain.Interfaces.Repositories.Command
     {
         Task<Sponsor> AddSponsorAsync(Sponsor sponsor);
         Task<Sponsor> UpdateSponsorAsync(Guid id, Sponsor sponsor);
-        Task<bool> SoftDeleteSponsorAsync(Guid id);
+        Task<Sponsor> SoftDeleteSponsorAsync(Guid id);
     }
 }

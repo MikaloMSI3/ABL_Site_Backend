@@ -10,6 +10,6 @@ namespace PublicSite.Domain.Interfaces.Repositories.Command
         Task<Gallery> AddGalleryAsync(Gallery gallery);
         Task<List<Gallery>> AddManyGalleryAsync(List<Gallery> gallery);
         Task<Gallery> UpdateGalleryAsync(Guid id, Gallery gallery);
-        Task<bool> SoftDeleteGalleryAsync(Guid id);
+        Task<Gallery> SoftDeleteGalleryAsync(Guid id);
     }
 }

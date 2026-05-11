@@ -35,6 +35,8 @@ namespace PublicSite.Domain.Entities.Models
                 Description = description;
             if (year.HasValue)
                 Year = year.Value;
+
+            UpdatedAt = DateTime.UtcNow;
         }
 
         public void SoftDelete() => IsDeleted = true;

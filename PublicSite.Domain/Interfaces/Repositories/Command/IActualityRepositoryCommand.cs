@@ -9,6 +9,6 @@ namespace PublicSite.Domain.Interfaces.Repositories.Command
     {
         Task<Actuality> AddActualityAsync(Actuality actuality);
         Task<Actuality> UpdateActualityAsync(Guid id, Actuality actuality);
-        Task<bool> SoftDeleteActualityAsync(Guid id);
+        Task<Actuality> SoftDeleteActualityAsync(Guid id);
     }
 }

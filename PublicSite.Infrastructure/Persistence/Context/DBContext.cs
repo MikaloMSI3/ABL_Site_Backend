@@ -22,6 +22,7 @@ namespace PublicSite.Infrastructure.Persistence.Context
         public DbSet<Value> Values => Set<Value>();
         public DbSet<Album> Albums => Set<Album>();
         public DbSet<NewsLetter> NewsLetters => Set<NewsLetter>();
+        public DbSet<User> Users => Set<User>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

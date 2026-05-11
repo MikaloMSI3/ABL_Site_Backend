@@ -1,8 +1,9 @@
-﻿using System;
+﻿using PublicSite.Domain.Entities.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace PublicSite.Application.Features.Faqs.Command.Delete
 {
-    public record DeleteFaqResponse(bool Success);
+    public record DeleteFaqResponse(Faq Faq);
 }

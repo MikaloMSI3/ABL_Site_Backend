@@ -38,6 +38,8 @@ namespace PublicSite.Domain.Entities.Models
 
             if (faqCategoryId.HasValue || faqCategoryId != null)
                 FaqCategoryId = faqCategoryId;
+
+            UpdatedAt = DateTime.UtcNow;
         }
 
         public void SoftDeleteFaq() => IsDeleted = true;

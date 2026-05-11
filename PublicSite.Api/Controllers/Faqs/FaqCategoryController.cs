@@ -1,9 +1,11 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PublicSite.Api.Models;
 using PublicSite.Application.Features.FaqCategories.Command.Create;
 using PublicSite.Application.Features.FaqCategories.Command.Delete;
+using PublicSite.Application.Features.FaqCategories.Command.Update;
 using PublicSite.Application.Features.FaqCategories.Query.GetAll;
 
 namespace PublicSite.Api.Controllers.Faqs
@@ -12,6 +14,7 @@ namespace PublicSite.Api.Controllers.Faqs
     [ApiController]
     public class FaqCategoryController(IMediator _mediator) : ControllerBase
     {
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] GetAllFaqCatQuery query)
         {
@@ -25,6 +28,7 @@ namespace PublicSite.Api.Controllers.Faqs
             });
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateFaqCatCommand command)
         {
@@ -38,7 +42,7 @@ namespace PublicSite.Api.Controllers.Faqs
             });
         }
 
-
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -49,6 +53,27 @@ namespace PublicSite.Api.Controllers.Faqs
                 Success = true,
                 Code = 200,
                 Message = "Opération réussie",
+            });
+        }
+
+        [Authorize]
+        [HttpPut]
+        public async Task<IActionResult> Update([FromQuery] Guid id, [FromBody] string name)
+        {
+            var command = new UpdateFaqCatCommand
+                (
+                    Id: id,
+                    Name: name
+                );
+
+            var result = await _mediator.Send(command);
+
+            return Ok(new ApiResponse<UpdateFaqCatResponse>
+            {
+                Success = true,
+                Code = 200,
+                Message = "Opération réussie",
+                Data = result
             });
         }
     }

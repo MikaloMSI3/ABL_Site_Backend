@@ -1,8 +1,9 @@
-﻿using System;
+﻿using PublicSite.Domain.Entities.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace PublicSite.Application.Features.Timelines.Command.Delete
 {
-    public record DeleteTimelineResponse(bool Success);
+    public record DeleteTimelineResponse(TimelineItem TimelineItem);
 }

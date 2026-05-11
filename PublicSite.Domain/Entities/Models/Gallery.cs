@@ -48,6 +48,8 @@ namespace PublicSite.Domain.Entities.Models
                 CheckRessourceValue(ressource);
                 Ressource = ressource;
             }
+
+            UpdatedAt = DateTime.UtcNow;
         }
         public static void CheckStringValue(string value)
         {

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using PublicSite.Domain.Entities.Models;
 using PublicSite.Domain.Interfaces.Repositories.Command;
 using PublicSite.Domain.Interfaces.Repositories.Query;
@@ -20,11 +21,19 @@ namespace PublicSite.Infrastructure.Persistence.Repositories.Command
             return entity;
         }
 
-        public async Task<bool> SoftDeleteTimelineAsync(Guid id)
+        public async Task<TimelineItem> SoftDeleteTimelineAsync(Guid id)
         {
-            var entity = _query.GetByIdTimelineAsync(id);
-            entity.Result.SoftDelete();
-            return entity != null;
+            var entity = await _query.GetByIdTimelineAsync(id);
+            entity.SoftDelete();
+            return entity;
+        }
+
+        public async Task<TimelineItem> UpdateTimeLineAsync(Guid id, TimelineItem timelineItem)
+        {
+            var entity = await _query.GetByIdTimelineAsync(id);
+            entity.Update(timelineItem.Title, timelineItem.Description, timelineItem.Year);
+
+            return entity;
         }
     }
 }

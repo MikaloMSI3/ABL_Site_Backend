@@ -12,6 +12,7 @@ namespace PublicSite.Infrastructure.Common.Configurations
         public void Configure(EntityTypeBuilder<Album> builder)
         {
             builder.ToTable("Albums");
+            builder.HasQueryFilter(x => !x.IsDeleted);
 
             builder.HasMany(x => x.Galleries)
                 .WithOne()

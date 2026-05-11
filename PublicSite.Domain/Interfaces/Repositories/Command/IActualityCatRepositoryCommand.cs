@@ -8,6 +8,7 @@ namespace PublicSite.Domain.Interfaces.Repositories.Command
     public interface IActualityCatRepositoryCommand
     {
         Task<ActualityCategory> AddActualityCategoryAsync(ActualityCategory actuality);
-        Task<bool> SoftDeleteActualityCategoryAsync(Guid id);
+        Task<ActualityCategory> SoftDeleteActualityCategoryAsync(Guid id);
+        Task<ActualityCategory> UpdateActualityCategoryAsync(Guid id, string name);
     }
 }

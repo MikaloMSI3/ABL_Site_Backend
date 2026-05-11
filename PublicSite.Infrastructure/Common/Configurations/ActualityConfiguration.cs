@@ -14,6 +14,7 @@ namespace PublicSite.Infrastructure.Common.Configurations
         {
             builder.ToTable("News");
             builder.HasIndex(x => x.ActualityCategoryId);
+            builder.HasQueryFilter(x => !x.IsDeleted);
 
             builder.OwnsOne(a => a.Ressource, file =>
             {

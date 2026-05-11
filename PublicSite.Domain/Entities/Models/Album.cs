@@ -28,6 +28,7 @@ namespace PublicSite.Domain.Entities.Models
         {
             CheckStringValue(name);
             Name = name;
+            UpdatedAt = DateTime.UtcNow;
         }
 
         public void SoftDelete() => IsDeleted = true;

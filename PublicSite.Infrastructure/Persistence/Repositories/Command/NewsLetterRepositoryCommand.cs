@@ -20,11 +20,11 @@ namespace PublicSite.Infrastructure.Persistence.Repositories.Command
             return entity;
         }
 
-        public async Task<bool> SoftDeleteNewsLetterAsync(Guid id)
+        public async Task<NewsLetter> SoftDeleteNewsLetterAsync(Guid id)
         {
-            var entity = _query.GetByIdNewsLetterAsync(id);
-            entity.Result.SoftDelete();
-            return entity != null;
+            var entity = await _query.GetByIdNewsLetterAsync(id);
+            entity.SoftDelete();
+            return entity;
         }
     }
 }

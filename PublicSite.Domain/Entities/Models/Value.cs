@@ -41,6 +41,7 @@ namespace PublicSite.Domain.Entities.Models
                 CheckRessourceValue(ressource);
                 Icon = ressource;
             }
+            UpdatedAt = DateTime.UtcNow;
         }
         public void SoftDelete() => IsDeleted = true;
         public static void CheckStringValue(string value)

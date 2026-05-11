@@ -66,6 +66,8 @@ namespace PublicSite.Domain.Entities.Models
             if (!String.IsNullOrWhiteSpace(mailBody))
                 MailBody = mailBody;
 
+            UpdatedAt = DateTime.UtcNow;
+
         }
 
         public static void CheckStringValue(string value)

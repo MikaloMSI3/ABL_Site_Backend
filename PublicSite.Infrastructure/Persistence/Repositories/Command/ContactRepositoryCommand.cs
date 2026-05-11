@@ -29,16 +29,17 @@ namespace PublicSite.Infrastructure.Persistence.Repositories.Command
             return entity;
         }
 
-        public async Task<bool> SoftDeleteContactAsync(Guid id)
+        public async Task<Contact> SoftDeleteContactAsync(Guid id)
         {
-            var entity = _query.GetByIdContactAsync(id);
-            entity.Result.SoftDeleteContact();
-            return entity != null;
+            var entity = await _query.GetByIdContactAsync(id);
+            entity.SoftDeleteContact();
+            return entity;
         }
 
-        public Task<Contact> UpdateContactAsync(Guid id, Contact contact)
-        {
-            throw new NotImplementedException();
-        }
+        //public async Task<Contact> UpdateContactAsync(Guid id, Contact contact)
+        //{
+        //    var entity = await _query.GetByIdContactAsync(id);
+        //    entity.UpdateContact(contact.Lastname,contact.First)
+        //}
     }
 }

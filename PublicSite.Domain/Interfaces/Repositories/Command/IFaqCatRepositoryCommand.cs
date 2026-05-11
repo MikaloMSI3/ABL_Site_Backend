@@ -8,6 +8,7 @@ namespace PublicSite.Domain.Interfaces.Repositories.Command
     public interface IFaqCatRepositoryCommand
     {
         Task<FaqCategory> AddFaqCategoryAsync(FaqCategory actuality);
-        Task<bool> SoftDeleteFaqCategoryAsync(Guid id);
+        Task<FaqCategory> SoftDeleteFaqCategoryAsync(Guid id);
+        Task<FaqCategory> UpdateFaqCategoryAsync(Guid id, string name);
     }
 }

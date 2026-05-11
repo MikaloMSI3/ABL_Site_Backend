@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PublicSite.Api.Models;
@@ -15,6 +16,7 @@ namespace PublicSite.Api.Controllers.Galleries
     [ApiController]
     public class GalleryController(IMediator _mediator) : ControllerBase
     {
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] GetAllGalleryQuery query)
         {
@@ -28,6 +30,7 @@ namespace PublicSite.Api.Controllers.Galleries
             });
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
@@ -41,6 +44,7 @@ namespace PublicSite.Api.Controllers.Galleries
             });
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] CreateGalleryCommand command)
         {
@@ -54,6 +58,7 @@ namespace PublicSite.Api.Controllers.Galleries
             });
         }
 
+        [Authorize]
         [HttpPost("{albumId}")]
         public async Task<IActionResult> Create(Guid albumId, [FromForm] CreateManyGalleryRequest request)
         {
@@ -67,6 +72,7 @@ namespace PublicSite.Api.Controllers.Galleries
             });
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<IActionResult> Update([FromQuery] Guid id, [FromForm] UpdateGalleryRequest request)
         {
@@ -90,6 +96,7 @@ namespace PublicSite.Api.Controllers.Galleries
             });
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {

@@ -12,6 +12,7 @@ namespace PublicSite.Infrastructure.Common.Configurations
         public void Configure(EntityTypeBuilder<Slogan> builder)
         {
             builder.ToTable("Slogans");
+            builder.HasQueryFilter(x => !x.IsDeleted);
         }
     }
 }

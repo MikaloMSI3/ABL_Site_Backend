@@ -1,9 +1,11 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PublicSite.Api.Models;
 using PublicSite.Application.Features.Albums.Command.Create;
 using PublicSite.Application.Features.Albums.Command.Delete;
+using PublicSite.Application.Features.Albums.Command.Update;
 using PublicSite.Application.Features.Albums.Query.GetAll;
 
 
@@ -13,6 +15,7 @@ namespace PublicSite.Api.Controllers.Galleries
     [ApiController]
     public class AlbumController(IMediator _mediator) : ControllerBase
     {
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] GetAllAlbumQuery query)
         {
@@ -26,6 +29,7 @@ namespace PublicSite.Api.Controllers.Galleries
             });
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateAlbumCommand command)
         {
@@ -39,7 +43,7 @@ namespace PublicSite.Api.Controllers.Galleries
             });
         }
 
-
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -50,6 +54,27 @@ namespace PublicSite.Api.Controllers.Galleries
                 Success = true,
                 Code = 200,
                 Message = "Opération réussie",
+            });
+        }
+
+        [Authorize]
+        [HttpPut]
+        public async Task<IActionResult> Update([FromQuery] Guid id, [FromBody] string name)
+        {
+            var command = new UpdateAlbumCommand
+                (
+                    Id: id,
+                    Name : name
+                );
+
+            var result = await _mediator.Send(command);
+
+            return Ok(new ApiResponse<UpdateAlbumResponse>
+            {
+                Success = true,
+                Code = 200,
+                Message = "Opération réussie",
+                Data = result
             });
         }
     }

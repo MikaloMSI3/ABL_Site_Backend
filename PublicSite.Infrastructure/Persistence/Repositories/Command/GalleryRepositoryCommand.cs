@@ -30,17 +30,17 @@ namespace PublicSite.Infrastructure.Persistence.Repositories.Command
             return galleryList;
         }
 
-        public async Task<bool> SoftDeleteGalleryAsync(Guid id)
+        public async Task<Gallery> SoftDeleteGalleryAsync(Guid id)
         {
-            var entity = _query.GetByIdGalleryAsync(id);
-            entity.Result.SoftDeleteGallery();
-            return entity != null;
+            var entity = await _query.GetByIdGalleryAsync(id);
+            entity.SoftDeleteGallery();
+            return entity;
         }
 
-        public Task<Gallery> UpdateGalleryAsync(Guid id, Gallery actuality)
+        public async Task<Gallery> UpdateGalleryAsync(Guid id, Gallery actuality)
         {
-            var entity = _query.GetByIdGalleryAsync(id);
-            entity.Result.Update(actuality.Date, actuality.Description, actuality.AlbumId, actuality.Ressource);
+            var entity = await _query.GetByIdGalleryAsync(id);
+            entity.Update(actuality.Date, actuality.Description, actuality.AlbumId, actuality.Ressource);
             return entity;
         }
     }

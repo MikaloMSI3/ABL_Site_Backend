@@ -1,9 +1,11 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PublicSite.Api.Models;
 using PublicSite.Application.Features.Timelines.Command.Create;
 using PublicSite.Application.Features.Timelines.Command.Delete;
+using PublicSite.Application.Features.Timelines.Command.Update;
 using PublicSite.Application.Features.Timelines.Query.GetAll;
 
 namespace PublicSite.Api.Controllers.Timelines
@@ -12,6 +14,7 @@ namespace PublicSite.Api.Controllers.Timelines
     [ApiController]
     public class TimelineController(IMediator _mediator) : ControllerBase
     {
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] GetAllTimelineQuery query)
         {
@@ -25,6 +28,7 @@ namespace PublicSite.Api.Controllers.Timelines
             });
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateTimelineCommand command)
         {
@@ -38,6 +42,7 @@ namespace PublicSite.Api.Controllers.Timelines
             });
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -48,6 +53,29 @@ namespace PublicSite.Api.Controllers.Timelines
                 Success = true,
                 Code = 200,
                 Message = "Opération réussie",
+            });
+        }
+
+        [Authorize]
+        [HttpPut]
+        public async Task<IActionResult> Update([FromQuery] Guid id, [FromBody] UpdateTimelineRequest request)
+        {
+            var command = new UpdateTimelineCommand
+                (
+                    Id: id,
+                    Title: request.Title,
+                    Description: request.Description,
+                    Year : request.Year
+                );
+
+            var result = await _mediator.Send(command);
+
+            return Ok(new ApiResponse<UpdateTimelineResponse>
+            {
+                Success = true,
+                Code = 200,
+                Message = "Opération réussie",
+                Data = result
             });
         }
     }

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PublicSite.Api.Models;
@@ -15,6 +16,7 @@ namespace PublicSite.Api.Controllers.Actualities
     [ApiController]
     public class ActualityController(IMediator _mediator) : ControllerBase
     {
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] GetAllActualityQuery query)
         {
@@ -28,6 +30,7 @@ namespace PublicSite.Api.Controllers.Actualities
             });
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
@@ -41,6 +44,7 @@ namespace PublicSite.Api.Controllers.Actualities
             });
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create([FromForm] CreateActualityCommand command)
         {
@@ -54,6 +58,7 @@ namespace PublicSite.Api.Controllers.Actualities
             });
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<IActionResult> Update([FromQuery] Guid id, [FromForm] UpdateActualityRequest request)
         {
@@ -78,6 +83,7 @@ namespace PublicSite.Api.Controllers.Actualities
             });
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {

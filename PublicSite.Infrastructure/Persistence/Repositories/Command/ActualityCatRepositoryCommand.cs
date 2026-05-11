@@ -19,12 +19,18 @@ namespace PublicSite.Infrastructure.Persistence.Repositories.Command
             return entity;
         }
 
-        public async Task<bool> SoftDeleteActualityCategoryAsync(Guid id)
+        public async Task<ActualityCategory> SoftDeleteActualityCategoryAsync(Guid id)
         {
-            var entity = _query.GetByIdActualityCategoryAsync(id);
-            entity.Result.SoftDelete();
-            return entity != null;
+            var entity = await _query.GetByIdActualityCategoryAsync(id);
+            entity.SoftDelete();
+            return entity;
         }
 
+        public async Task<ActualityCategory> UpdateActualityCategoryAsync(Guid id, string name)
+        {
+            var entity = await _query.GetByIdActualityCategoryAsync(id);
+            entity.UpdateName(name);
+            return entity;
+        }
     }
 }

@@ -8,6 +8,7 @@ namespace PublicSite.Domain.Interfaces.Repositories.Command
     public interface ITimelineRepositoryCommand
     {
         Task<TimelineItem> AddTimelineAsync(TimelineItem actuality);
-        Task<bool> SoftDeleteTimelineAsync(Guid id);
+        Task<TimelineItem> SoftDeleteTimelineAsync(Guid id);
+        Task<TimelineItem> UpdateTimeLineAsync(Guid id, TimelineItem timelineItem);
     }
 }

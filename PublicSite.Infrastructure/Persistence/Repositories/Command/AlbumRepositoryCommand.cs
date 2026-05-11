@@ -19,11 +19,19 @@ namespace PublicSite.Infrastructure.Persistence.Repositories.Command
             return entity;
         }
 
-        public async Task<bool> SoftDeleteAlbumAsync(Guid id)
+        public async Task<Album> SoftDeleteAlbumAsync(Guid id)
         {
-            var entity = _query.GetByIdAlbumAsync(id);
-            entity.Result.SoftDelete();
-            return entity != null;
+            var entity = await _query.GetByIdAlbumAsync(id);
+            entity.SoftDelete();
+            return entity;
+        }
+
+        public async Task<Album> UpdateAlbumAsync(Guid id, string name)
+        {
+            var entity = await _query.GetByIdAlbumAsync(id);
+            entity.Update(name);
+
+            return entity;
         }
     }
 }

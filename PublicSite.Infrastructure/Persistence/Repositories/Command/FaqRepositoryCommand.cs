@@ -19,17 +19,17 @@ namespace PublicSite.Infrastructure.Persistence.Repositories.Command
             return entity;
         }
 
-        public async Task<bool> SoftDeleteFaqAsync(Guid id)
+        public async Task<Faq> SoftDeleteFaqAsync(Guid id)
         {
-            var entity = _query.GetByIdFaqAsync(id);
-            entity.Result.SoftDeleteFaq();
-            return entity != null;
+            var entity = await _query.GetByIdFaqAsync(id);
+            entity.SoftDeleteFaq();
+            return entity;
         }
 
-        public Task<Faq> UpdateFaqAsync(Guid id, Faq faq)
+        public async Task<Faq> UpdateFaqAsync(Guid id, Faq faq)
         {
-            var entity = _query.GetByIdFaqAsync(id);
-            entity.Result.Update(faq.Question, faq.Answer, faq.FaqCategoryId);
+            var entity = await _query.GetByIdFaqAsync(id);
+            entity.Update(faq.Question, faq.Answer, faq.FaqCategoryId);
             return entity;
         }
     }

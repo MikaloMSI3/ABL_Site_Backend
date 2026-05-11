@@ -13,6 +13,7 @@ namespace PublicSite.Infrastructure.Common.Configurations
         {
             builder.ToTable("FAQs");
             builder.HasIndex(x => x.FaqCategoryId);
+            builder.HasQueryFilter(x => !x.IsDeleted);
 
             builder.HasOne(x => x.Category)
                 .WithMany(c => c.Faqs)

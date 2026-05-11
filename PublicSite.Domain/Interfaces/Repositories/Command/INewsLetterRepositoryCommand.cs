@@ -8,6 +8,6 @@ namespace PublicSite.Domain.Interfaces.Repositories.Command
     public interface INewsLetterRepositoryCommand
     {
         Task<NewsLetter> AddNewsLetterAsync(NewsLetter actuality);
-        Task<bool> SoftDeleteNewsLetterAsync(Guid id);
+        Task<NewsLetter> SoftDeleteNewsLetterAsync(Guid id);
     }
 }

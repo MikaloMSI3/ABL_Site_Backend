@@ -8,6 +8,7 @@ namespace PublicSite.Domain.Interfaces.Repositories.Command
     public interface IHeroRepositoryCommand
     {
         Task<Image> AddHeroAsync(Image image);
-        Task<bool> SoftDeleteHeroAsync(Guid id);
+        Task<Image> UpdateHeroAsync(Guid id, Image image);
+        Task<Image> SoftDeleteHeroAsync(Guid id);
     }
 }

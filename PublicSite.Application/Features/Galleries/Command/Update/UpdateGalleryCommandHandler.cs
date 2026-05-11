@@ -15,17 +15,17 @@ namespace PublicSite.Application.Features.Galleries.Command.Update
     {
         public async Task<UpdateGalleryResponse> Handle(UpdateGalleryCommand request, CancellationToken cancellationToken)
         {
-            var act = _queryRepo.GetByIdGalleryAsync(request.Id);
-            act.Result.Update(request.Date, request.Description, request.AlbumId);
+            var act = await _queryRepo.GetByIdGalleryAsync(request.Id);
+            act.Update(request.Date, request.Description, request.AlbumId);
 
             if (request.Ressource != null)
             {
-                act.Result.Update(ressource: await _fileStorageService.SaveFileAsync(request.Ressource, "galleries"));
-                if (act.Result.Ressource != null)
-                    _fileStorageService.DeleteFileAsync(act.Result.Ressource);
+                act.Update(ressource: await _fileStorageService.SaveFileAsync(request.Ressource, "galleries"));
+                if (act.Ressource != null)
+                    _fileStorageService.DeleteFileAsync(act.Ressource);
             }
 
-            var entity = await _repository.UpdateGalleryAsync(request.Id, act.Result);
+            var entity = await _repository.UpdateGalleryAsync(request.Id, act);
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 

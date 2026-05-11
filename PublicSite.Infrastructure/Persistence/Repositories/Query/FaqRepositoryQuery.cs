@@ -31,10 +31,10 @@ namespace PublicSite.Infrastructure.Persistence.Repositories.Query
             return (await query.ToListAsync(), totalCount);
         }
 
-        public async Task<Faq> GetByIdFaqAsync(Guid id)
+        public async Task<Faq?> GetByIdFaqAsync(Guid id)
         {
             var entity = await _faqs.Include(x => x.Category).FirstOrDefaultAsync();
-            return entity ?? throw new Exception("Entity not found");
+            return entity ?? null;
         }
     }
 }

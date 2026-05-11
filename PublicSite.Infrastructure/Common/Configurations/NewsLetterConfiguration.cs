@@ -12,6 +12,7 @@ namespace PublicSite.Infrastructure.Common.Configurations
         public void Configure(EntityTypeBuilder<NewsLetter> builder)
         {
             builder.ToTable("NewsLetters");
+            builder.HasQueryFilter(x => !x.IsDeleted);
         }
     }
 }

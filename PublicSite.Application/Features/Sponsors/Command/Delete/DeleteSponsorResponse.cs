@@ -1,8 +1,9 @@
-﻿using System;
+﻿using PublicSite.Domain.Entities.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace PublicSite.Application.Features.Sponsors.Command.Delete
 {
-    public record DeleteSponsorResponse(bool Success);
+    public record DeleteSponsorResponse(Sponsor Sponsor);
 }

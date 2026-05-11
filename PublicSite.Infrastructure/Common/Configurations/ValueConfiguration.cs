@@ -13,6 +13,7 @@ namespace PublicSite.Infrastructure.Common.Configurations
         {
             builder.ToTable("Values");
             builder.HasIndex(x => x.Title);
+            builder.HasQueryFilter(x => !x.IsDeleted);
 
             builder.OwnsOne(a => a.Icon, file =>
             {

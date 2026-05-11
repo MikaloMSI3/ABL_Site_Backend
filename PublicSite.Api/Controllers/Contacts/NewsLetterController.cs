@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PublicSite.Api.Models;
@@ -12,6 +13,7 @@ namespace PublicSite.Api.Controllers.Contacts
     [ApiController]
     public class NewsLetterController(IMediator _mediator) : ControllerBase
     {
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] GetAllNewsLetterQuery query)
         {
@@ -25,6 +27,7 @@ namespace PublicSite.Api.Controllers.Contacts
             });
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateNewsLetterCommand command)
         {
@@ -38,7 +41,7 @@ namespace PublicSite.Api.Controllers.Contacts
             });
         }
 
-
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {

@@ -36,6 +36,8 @@ namespace PublicSite.Domain.Entities.Models
                 CheckRessourceValue(ressource);
                 Ressource = ressource;
             }
+
+            UpdatedAt = DateTime.UtcNow;
         }
 
         public void SoftDelete() => IsDeleted = true;

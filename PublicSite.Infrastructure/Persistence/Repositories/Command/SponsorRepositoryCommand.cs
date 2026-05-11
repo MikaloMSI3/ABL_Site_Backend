@@ -21,16 +21,18 @@ namespace PublicSite.Infrastructure.Persistence.Repositories.Command
             return entity;
         }
 
-        public async Task<bool> SoftDeleteSponsorAsync(Guid id)
+        public async Task<Sponsor> SoftDeleteSponsorAsync(Guid id)
         {
-            var entity = _query.GetByIdSponsorAsync(id);
-            entity.Result.SoftDeleteSponsor();
-            return entity != null;
+            var entity = await _query.GetByIdSponsorAsync(id);
+            entity.SoftDeleteSponsor();
+            return entity;
         }
 
-        public Task<Sponsor> UpdateSponsorAsync(Guid id, Sponsor sponsor)
+        public async Task<Sponsor> UpdateSponsorAsync(Guid id, Sponsor sponsor)
         {
-            throw new NotImplementedException();
+            var entity = await _query.GetByIdSponsorAsync(id);
+            entity.Update(sponsor.Name, sponsor.Logo, sponsor.SiteUrl);
+            return entity;
         }
     }
 }

@@ -29,6 +29,7 @@ namespace PublicSite.Domain.Entities.Models
         {
             CheckStringValue(name);
             Name = name;
+            UpdatedAt = DateTime.UtcNow;
         }
 
         public static void CheckStringValue(string value)

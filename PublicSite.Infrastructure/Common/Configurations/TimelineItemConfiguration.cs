@@ -12,6 +12,7 @@ namespace PublicSite.Infrastructure.Common.Configurations
         public void Configure(EntityTypeBuilder<TimelineItem> builder)
         {
             builder.ToTable("TimelineItems");
+            builder.HasQueryFilter(x => !x.IsDeleted);
         }
     }
 }
