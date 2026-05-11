@@ -15,7 +15,6 @@ namespace PublicSite.Api.Controllers.Sponsors
     [ApiController]
     public class SponsorController(IMediator _mediator) : ControllerBase
     {
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] GetAllSponsorQuery query)
         {

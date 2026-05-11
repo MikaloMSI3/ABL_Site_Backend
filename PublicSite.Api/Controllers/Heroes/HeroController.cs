@@ -14,7 +14,6 @@ namespace PublicSite.Api.Controllers.Heroes
     [ApiController]
     public class HeroController(IMediator _mediator) : ControllerBase
     {
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] GetAllHeroQuery query)
         {

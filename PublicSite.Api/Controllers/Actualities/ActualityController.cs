@@ -16,7 +16,6 @@ namespace PublicSite.Api.Controllers.Actualities
     [ApiController]
     public class ActualityController(IMediator _mediator) : ControllerBase
     {
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] GetAllActualityQuery query)
         {
@@ -30,7 +29,6 @@ namespace PublicSite.Api.Controllers.Actualities
             });
         }
 
-        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {

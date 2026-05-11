@@ -15,7 +15,6 @@ namespace PublicSite.Api.Controllers.Galleries
     [ApiController]
     public class AlbumController(IMediator _mediator) : ControllerBase
     {
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] GetAllAlbumQuery query)
         {

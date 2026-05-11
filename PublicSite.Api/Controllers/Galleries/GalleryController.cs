@@ -16,7 +16,6 @@ namespace PublicSite.Api.Controllers.Galleries
     [ApiController]
     public class GalleryController(IMediator _mediator) : ControllerBase
     {
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] GetAllGalleryQuery query)
         {
@@ -30,7 +29,6 @@ namespace PublicSite.Api.Controllers.Galleries
             });
         }
 
-        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {

@@ -14,7 +14,6 @@ namespace PublicSite.Api.Controllers.Timelines
     [ApiController]
     public class TimelineController(IMediator _mediator) : ControllerBase
     {
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] GetAllTimelineQuery query)
         {

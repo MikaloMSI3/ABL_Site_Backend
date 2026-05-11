@@ -13,7 +13,6 @@ namespace PublicSite.Api.Controllers.Contacts
     [ApiController]
     public class NewsLetterController(IMediator _mediator) : ControllerBase
     {
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] GetAllNewsLetterQuery query)
         {
@@ -27,7 +26,6 @@ namespace PublicSite.Api.Controllers.Contacts
             });
         }
 
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateNewsLetterCommand command)
         {

@@ -15,7 +15,6 @@ namespace PublicSite.Api.Controllers.Actualities
     [ApiController]
     public class ActualityCategoryController(IMediator _mediator) : ControllerBase
     {
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] GetAllActualityCatQuery query)
         {

@@ -14,7 +14,6 @@ namespace PublicSite.Api.Controllers.Faqs
     [ApiController]
     public class FaqCategoryController(IMediator _mediator) : ControllerBase
     {
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] GetAllFaqCatQuery query)
         {

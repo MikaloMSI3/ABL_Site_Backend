@@ -15,7 +15,6 @@ namespace PublicSite.Api.Controllers.Users
     [ApiController]
     public class UserController(IMediator _mediator) : ControllerBase
     {
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] GetAllUserQuery query)
         {
@@ -29,7 +28,6 @@ namespace PublicSite.Api.Controllers.Users
             });
         }
 
-        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
