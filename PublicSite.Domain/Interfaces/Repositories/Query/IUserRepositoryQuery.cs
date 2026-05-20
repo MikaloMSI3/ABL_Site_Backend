@@ -9,6 +9,7 @@ namespace PublicSite.Domain.Interfaces.Repositories.Query
     {
         Task<User> GetByIdUserAsync(Guid id);
         Task<User?> GetByEmail(string email);
+        Task<User?> GetByRefreshAsync(string refreshToken);
         Task<(IEnumerable<User> Result, long TotalCount)> GetAllUserAsync();
     }
 }

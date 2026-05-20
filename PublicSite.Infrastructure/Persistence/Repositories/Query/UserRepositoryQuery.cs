@@ -33,5 +33,11 @@ namespace PublicSite.Infrastructure.Persistence.Repositories.Query
             var entity = await _users.FindAsync(id);
             return entity ?? throw new Exception("Entity not found");
         }
+
+        public async Task<User?> GetByRefreshAsync(string refreshToken)
+        {
+            var entity = await _users.FirstOrDefaultAsync(x => x.RefreshToken == refreshToken);
+            return entity ?? null;
+        }
     }
 }

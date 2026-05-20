@@ -3,3 +3,6 @@ obj/
 .vs/
 *.user
 *.suo
+
+PublicSite.Api.appsettings.json
+PublicSite.Api.appsettings.Development.json
